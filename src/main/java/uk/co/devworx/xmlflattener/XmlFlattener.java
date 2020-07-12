@@ -22,9 +22,9 @@ public class XmlFlattener
     private static final Logger logger = LogManager.getLogger(XmlFlattener.class);
     private static final boolean XmlFlattener_EnableParallelJavaLambdaStreams = XMLFlattener_PropertyManager.XmlFlattener_EnableParallelJavaLambdaStreams;
 
-    public static void produceCSVFlattens(final Path rootPath, final Timestamp batchTime, final XmlFlattenerSpec spec)
+    public static void produceCSVFlattens(final Timestamp batchTime, final XmlFlattenerSpec spec)
     {
-        ___produceCSVFlattens_Local(rootPath, batchTime, spec);
+        ___produceCSVFlattens_Local(batchTime, spec);
     }
 
     private static List<FlattenerListItem> getItemsRequiringResolution(final XmlFlattenerSpec spec)
@@ -32,12 +32,13 @@ public class XmlFlattener
         return spec.getSpecListItems().values().stream().filter(f -> f.containsDynamicColunns()).collect(Collectors.toList());
     }
 
-    public static void fullyResolveDynamicColumns(final Path rootPath,
-                                                  final Timestamp batchTime,
+    public static void fullyResolveDynamicColumns(final Timestamp batchTime,
                                                   final XmlFlattenerSpec spec)
     {
+        final Path inputPath = spec.getInputPath();
         try
         {
+
             final List<FlattenerListItem> flattenerListItems = getItemsRequiringResolution(spec);
             logger.info("There are a total of " + flattenerListItems.size() + " that needs expansion.");
             if(flattenerListItems.isEmpty() == true)
@@ -50,7 +51,7 @@ public class XmlFlattener
                 item.setUpContainersForPreProcssing();
             }
 
-            final Path XmlInputsDirectory = getRelativeOrAbsolutePath(rootPath, XMLFlattener_PropertyManager.XmlFlattener_LocalRunXMLDirectory);
+            final Path XmlInputsDirectory = getRelativeOrAbsolutePath(inputPath, XMLFlattener_PropertyManager.XmlFlattener_LocalRunXMLDirectory);
             final List<Path> allXMLFiles = getAllXmlFiles(XmlInputsDirectory);
 
             int rows = 0;
@@ -74,7 +75,7 @@ public class XmlFlattener
                 }
                 catch (SAXException | IOException ex)
                 {
-                    handleAndLogBrokenXMLInFeed(rootPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
+                    handleAndLogBrokenXMLInFeed(inputPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
                     continue;
                 }
                 if(paramBagPre == null)
@@ -102,18 +103,19 @@ public class XmlFlattener
         }
     }
 
-    static void ___produceCSVFlattens_Local(final Path rootPath, final Timestamp batchTime, final XmlFlattenerSpec spec)
+    static void ___produceCSVFlattens_Local(final Timestamp batchTime, final XmlFlattenerSpec spec)
     {
+        final Path inputPath = spec.getInputPath();
         try
         {
             final Map<String, FlattenerListItem> mapListItemMap = spec.getSpecListItems();
             final Collection<FlattenerListItem> flattenerListItems = mapListItemMap.values();
 
             for(FlattenerListItem m : flattenerListItems){
-                m.setUpCSVPrinterAndContainers(rootPath);
+                m.setUpCSVPrinterAndContainers(inputPath);
                 m.setMatchesExistingTable(false);
             }
-            final Path XmlInputsDirectory = getRelativeOrAbsolutePath(rootPath, XMLFlattener_PropertyManager.XmlFlattener_LocalRunXMLDirectory);
+            final Path XmlInputsDirectory = getRelativeOrAbsolutePath(inputPath, XMLFlattener_PropertyManager.XmlFlattener_LocalRunXMLDirectory);
             final List<Path> allXMLFiles = getAllXmlFiles(XmlInputsDirectory);
 
             int rows = 0;
@@ -137,7 +139,7 @@ public class XmlFlattener
                 }
                 catch (SAXException | IOException ex)
                 {
-                    handleAndLogBrokenXMLInFeed(rootPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
+                    handleAndLogBrokenXMLInFeed(inputPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
                     continue;
                 }
                 if(paramBagPre == null){

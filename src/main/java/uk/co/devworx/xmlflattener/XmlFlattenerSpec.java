@@ -28,8 +28,7 @@ public class XmlFlattenerSpec
 
     private final String name;
     private final Path originatingFile;
-
-    private final String xmlColumnName;
+    private final Path inputPath;
 
     private final Map<String, FlattenerListItem> specListItems;
 
@@ -40,13 +39,13 @@ public class XmlFlattenerSpec
 
     XmlFlattenerSpec(Path originatingFile,
                      String name,
-                     String xmlColumnName,
-                     Map<String, FlattenerListItem> mapListItemsP)
+                     Map<String, FlattenerListItem> mapListItemsP,
+                     Path inputPath)
     {
         this.originatingFile = originatingFile;
         this.name = name;
         this.specListItems = mapListItemsP;
-        this.xmlColumnName = xmlColumnName;
+        this.inputPath = inputPath;
         specListItems.values().forEach(m ->
         {
             m.setParent(this);
@@ -55,6 +54,11 @@ public class XmlFlattenerSpec
         totalBytesProcessed = new AtomicLong();
         totalBytesToXmlDocConversionDuration = new AtomicLong();
         totalXmlsProcessed = new AtomicLong();
+    }
+
+    public Path getInputPath()
+    {
+        return inputPath;
     }
 
     public Path getOriginatingFiles()
@@ -70,11 +74,6 @@ public class XmlFlattenerSpec
     public Map<String, FlattenerListItem> getSpecListItems()
     {
         return Collections.unmodifiableMap(specListItems);
-    }
-
-    public String getXmlColumnName()
-    {
-        return xmlColumnName;
     }
 
     public void addToBytesProcessed(long bytesProcessed)
@@ -135,22 +134,23 @@ class FlattenerListItem implements Closeable
     private volatile List<LayerRowsContainer> preprocess_containers;
 
     private final String mapName;
-    private final String outputTable;
+    private final String outputPath;
     private final List<XmlFlattenerSpecColumn> columns;
     private final List<XmlFlattenerExplodeItem> explodeItems;
     private final AtomicLong xmlsProcessed;
     private final AtomicLong csvRowsWritten;
     private final AtomicLong processDocumentDurations;
 
-    public static FlattenerListItem create(final String mapName, final String outputTable)
+    public static FlattenerListItem create(final String mapName,
+                                           final String outputPath)
     {
-        return new FlattenerListItem(mapName, outputTable);
+        return new FlattenerListItem(mapName, outputPath);
     }
 
-    private FlattenerListItem(String mapName, String outputTable)
+    private FlattenerListItem(String mapName, String outputPath)
     {
         this.mapName = mapName;
-        this.outputTable = outputTable;
+        this.outputPath = outputPath;
 
         columns = new ArrayList<>();
         explodeItems = new ArrayList<>();
@@ -272,7 +272,7 @@ class FlattenerListItem implements Closeable
             throw new RuntimeException("You have already set up the containers and CSV file for " + getMapName() + " - you cannot do so again!");
         }
 
-        outputCSVFile = rootPath.resolve(getOutputTable());
+        outputCSVFile = rootPath.resolve(getOutputPath());
         matchingDatabaseTable = outputCSVFile.getFileName().toString().replace(".csv", "");
         final Path csvPattern = outputCSVFile.getParent();
         try
@@ -310,9 +310,9 @@ class FlattenerListItem implements Closeable
         return mapName;
     }
 
-    public String getOutputTable()
+    public String getOutputPath()
     {
-        return outputTable;
+        return outputPath;
     }
 
     public String getMatchingDatabaseTable()

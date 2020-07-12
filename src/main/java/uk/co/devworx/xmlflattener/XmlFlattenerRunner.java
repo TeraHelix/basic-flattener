@@ -39,12 +39,12 @@ public class XmlFlattenerRunner
     {
          extractorSpecs.forEach((k,v) ->
         {
-            XmlFlattener.fullyResolveDynamicColumns(spec.getParent(), batchTime, v);
+            XmlFlattener.fullyResolveDynamicColumns(batchTime, v);
         });
 
         extractorSpecs.forEach((k,v) ->
         {
-            XmlFlattener.produceCSVFlattens(spec.getParent(), batchTime, v);
+            XmlFlattener.produceCSVFlattens(batchTime, v);
         });
 
         List<FlattenerListItem> mapItems = new ArrayList<>();

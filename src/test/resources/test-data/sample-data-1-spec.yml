@@ -1,5 +1,6 @@
 
 name: Sample Data 1 Flattener
+inputPath: src/test/resources/test-data
 
 outputTables:
   - name: table-1

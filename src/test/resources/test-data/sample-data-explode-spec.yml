@@ -1,5 +1,6 @@
 
 name: Sample Data Explode Flattener
+inputPath: src/test/resources/test-data
 
 outputTables:
   - name: table-explode

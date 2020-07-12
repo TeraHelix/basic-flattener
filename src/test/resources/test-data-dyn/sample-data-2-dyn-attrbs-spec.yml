@@ -1,5 +1,6 @@
 
 name: Sample Data Dynamic Attribute Flattener
+inputPath: src/test/resources/test-data-dyn
 
 outputTables:
   - name: table-explode

@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -53,7 +54,7 @@ public class XmlFlattenerSpecFactory
 	public static Map<String, XmlFlattenerSpec> parse(Path yamlFile)
 	{
 		final Yaml_Spec yamlSpec = parseYamlSpec(yamlFile);
-
+		final Path inputPath = Paths.get(yamlSpec.getInputPath());
 
 		final Map<String, XmlFlattenerSpec> results = new LinkedHashMap<>();
 		final AtomicInteger overallColumnOrderSeq = new AtomicInteger();
@@ -68,7 +69,11 @@ public class XmlFlattenerSpecFactory
 		{
 			final String name = outputTable.getName();
 			final Map<String, FlattenerListItem> mapListItems = new LinkedHashMap<>();
-			final FlattenerListItem mli = FlattenerListItem.create(name, outputTable.getOutputFile());
+
+			Objects.requireNonNull(outputTable.getOutputFile(), "You must specify an output table in your configuration");
+
+			final FlattenerListItem mli = FlattenerListItem.create(name,
+																   outputTable.getOutputFile());
 			mapListItems.put(mli.getMapName(), mli);
 
 			//Now the columns
@@ -90,7 +95,7 @@ public class XmlFlattenerSpecFactory
 										   allColumns, allExplodeItems);
 			}
 
-			results.put(name, new XmlFlattenerSpec(yamlFile, name, "", mapListItems));
+			results.put(name, new XmlFlattenerSpec(yamlFile, name, mapListItems,inputPath));
 		}
 
 
@@ -220,6 +225,7 @@ class Yaml_Spec
 {
 	private String name;
 	private List<Yaml_Spec_OutputTable> outputTables;
+	private String inputPath;
 
 	public String getName()
 	{
@@ -241,6 +247,15 @@ class Yaml_Spec
 		this.outputTables = outputTables;
 	}
 
+	public String getInputPath()
+	{
+		return inputPath;
+	}
+
+	public void setInputPath(String inputPath)
+	{
+		this.inputPath = inputPath;
+	}
 }
 
 
@@ -269,6 +284,8 @@ class Yaml_Spec_OutputTable
 	{
 		this.outputFile = outputFile;
 	}
+
+
 
 	public List<Yaml_Spec_Column> getDefinition()
 	{
