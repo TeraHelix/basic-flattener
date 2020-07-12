@@ -1,0 +1,34 @@
+
+name: Sample Data Dynamic Attribute Flattener
+
+outputTables:
+  - name: table-explode
+    outputFile: ../../../../target/sample-data-dyn/dyn-attribute.csv
+
+    definition:
+    - columnName: element_0_key_1
+      sourceType: xpath
+      sourceDef: root/element-0/@key-1
+
+    - columnName: element_0_key_dyn_
+      sourceType: dynAttribute
+      sourceDef: root/element-0
+      attributeFilter: ".*" # A regex for all the columns on this item.
+
+    - columnName: element_0_key_2
+      sourceType: xpath
+      sourceDef: root/element-0/@key-2
+
+    - columnName: element_3
+      sourceType: xpath
+      sourceDef: root/element-exp/element-exp-01
+      explode: true
+      repeatingList:
+      - columnName: dyn_colname_
+        sourceType: dynAttribute
+        sourceDef: "."
+        attributeFilter: ".*" # A regex for all the columns on this item.
+
+      - columnName: element-exp-01_content
+        sourceType: xpath
+        sourceDef: text()

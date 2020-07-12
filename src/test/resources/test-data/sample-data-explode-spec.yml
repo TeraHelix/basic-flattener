@@ -1,0 +1,20 @@
+
+name: Sample Data Explode Flattener
+
+outputTables:
+  - name: table-explode
+    outputFile: ../../../../target/sample-data-1/table-explode.csv
+    definition:
+      - columnName: element_0
+        sourceType: xpath
+        sourceDef: root/element-0/@key-1
+
+      - columnName: element_3
+        sourceType: xpath
+        sourceDef: root/element-3/element-3-sub
+        explode: true
+        repeatingList:
+        - columnName: element-3-key-1
+          sourceType: xpath
+          circuitBreaker: 100
+          sourceDef: text()

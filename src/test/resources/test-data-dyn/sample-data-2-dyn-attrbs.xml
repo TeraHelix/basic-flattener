@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<root>
+
+<element-0  key-1 = "value-1"  key-2 = "value-2"  key-3 = "value-3">
+</element-0>
+
+<element-exp>
+	<element-exp-01 key-1="exp-key-1">X_01</element-exp-01>
+	<element-exp-01 key-1="exp-key-1" key-2="exp-key-2"/>
+	<element-exp-01 key-1="exp-key-1" key-3="exp-key-3"/>
+	<element-exp-01 key-4="exp-key-4"/>
+	<element-exp-01 key-5="exp-key-5"/>
+	<element-exp-01 key-1="exp-key-1" key-4="exp-key-4"/>
+</element-exp>
+
+</root>

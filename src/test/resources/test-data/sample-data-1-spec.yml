@@ -1,0 +1,58 @@
+
+name: Sample Data 1 Flattener
+
+outputTables:
+  - name: table-1
+    outputFile: ../../../../target/sample-data-1/table-1.csv
+    definition:
+      - columnName: element_0
+        sourceType: xpath
+        sourceDef: root/element-0/@key-1
+
+      - columnName: element_1
+        sourceType: xpath
+        sourceDef: root/element-1/element-1-item/@key-1
+
+      - columnName: element_4
+        sourceType: xpath
+        sourceDef: root/element-4
+
+      - columnName: current_time
+        sourceType: eval
+        sourceDef: currentTime
+
+  - name: table-2
+    outputFile: ../../../../target/sample-data-1/table-2.csv
+    definition:
+      - columnName: element_0
+        sourceType: xpath
+        sourceDef: root/element-0/@key-1
+
+      - columnName: element_2
+        sourceType: xpath
+        sourceDef: root/element-2/element-2-tag-name
+        explode: true
+        repeatingList:
+          - columnName: element-2-key-1
+            sourceType: xpath
+            sourceDef: "@key-1"
+
+          - columnName: element-2-key-2
+            sourceType: xpath
+            sourceDef: "@key-2"
+
+  - name: table-3
+    outputFile: ../../../../target/sample-data-1/table-3.csv
+    definition:
+      - columnName: element_0
+        sourceType: xpath
+        sourceDef: root/element-0/@key-1
+
+      - columnName: element_3
+        sourceType: xpath
+        sourceDef: root/element-3/element-3-sub
+        explode: true
+        repeatingList:
+          - columnName: element-3-key-1
+            sourceType: xpath
+            sourceDef: text()

@@ -1,0 +1,74 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<root>
+
+<element-0
+key-1 = "value-1"
+key-2 = "value-2"
+key-3 = "value-3"
+>
+
+<element-0-1>
+<element-0-1-tag-name key-1="value-11" key-2="value-22" key-3="value-33" />
+<element-0-1-tag-name key-1="value-44" key-2="value-55" key-3="value-66" />
+<element-0-1-tag-name key-1="value-77" key-2="value-88" key-3="value-99" />
+<element-0-1-tag-name key-1="value-10" key-2="value-11" key-3="value-12" />
+<element-0-1-tag-name key-1="value-13" key-2="value-14" key-3="value-15" />
+</element-0-1>
+
+<element-1>
+
+<element-1-item
+     key-1 = "element-item-1-1-key-1-value"
+     key-2 = "element-item-1-1-key-2-value"
+     key-3 = "element-item-1-1-key-3-value">
+    <arguments>
+	    <argument name="name-value-1">
+		<value><![CDATA[${some-value}.with-slashes-and-special-characters-1]] ]]></value>
+	    </argument>
+	    <argument name="name-value-2">
+	    	<value><![CDATA[${some-value}.with-slashes-and-special-characters-2]] ]]></value>
+	    </argument>
+    </arguments>
+</element-1-item>
+
+<element-1-item
+     key-1 = "element-item-1-2-key-1-value"
+     key-2 = "element-item-1-2-key-2-value"
+     key-3 = "element-item-1-2-key-3-value">
+    <arguments>
+	    <argument name="name-value-1">
+	    	<value><![CDATA[${some-value}.with-slashes-and-special-characters-1 ]]></value>
+	    </argument>
+	    <argument name="name-value-2">
+	    	<value><![CDATA[${some-value}.with-slashes-and-special-characters-2]] ]]></value>
+	    </argument>
+	    <argument name="name-value-3">
+	    	<value><![CDATA[${some-value}.with-slashes-and-special-characters-3]] ]]></value>
+	    </argument>
+	    <argument name="name-value-4">
+	    	<value><![CDATA[${some-value}.with-slashes-and-special-characters-4]] ]]></value>
+	    </argument>
+    </arguments>
+</element-1-item>
+
+</element-1>
+
+</element-0>
+
+	<element-2>
+		<element-2-tag-name key-1 = "value-1" key-2 = "value-1"/>
+		<element-2-tag-name key-1 = "value-2" key-2 = "value-2"/>
+		<element-2-tag-name key-1 = "value-3" key-2 = "value-3"/>
+		<element-2-tag-name key-1 = "value-4" key-2 = "value-4"/>
+	</element-2>
+
+
+	<element-3>
+		<element-3-sub>Sub-1</element-3-sub>
+		<element-3-sub>Sub-2</element-3-sub>
+		<element-3-sub>Sub-3</element-3-sub>
+		<element-3-sub>Sub-4</element-3-sub>
+	</element-3>
+
+
+</root>
