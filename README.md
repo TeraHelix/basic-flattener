@@ -7,16 +7,25 @@ The XML Flattener converts hierarchical XML documents into table shaped rectangu
 
 ## TL;DR - Running the Hello World Example
 
-Assuming you have a version Java 8+ installed (please see [Adopt OpenJDK](https://adoptopenjdk.net/)), you can download the binary and flatten out the [Hello World Input XML](examples/Hello-World/xml/input-01.xml) to a CSV file with:
+Assuming you have a version of Java 8+ installed (please see [Adopt OpenJDK](https://adoptopenjdk.net/)), you can download the binary and flatten out the [Hello World Input XML](examples/Hello-World/xml/input-01.xml) to a CSV file with:
 
 ### Linux
 ```
+
+git clone https://github.com/DevWorxCo/xml-flattener.git
+
+cd xml-flattener
+
 wget -P target https://www.devworx.co.uk/assets/jars/xml-flattener-exec.jar
 
 java -jar target/xml-flattener-exec.jar examples/Hello-World/hello-world.yml
 ```
 ### Windows
 ```
+git clone https://github.com/DevWorxCo/xml-flattener.git
+
+cd xml-flattener
+
 curl -o target/xml-flattener-exec.jar --create-dirs https://www.devworx.co.uk/assets/jars/xml-flattener-exec.jar
 
 java -jar target/xml-flattener-exec.jar examples/Hello-World/hello-world.yml
