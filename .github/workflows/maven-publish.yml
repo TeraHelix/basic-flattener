@@ -1,4 +1,4 @@
-name: Java 8 / 11 Build on Linux
+name: Java Build - Publish to GitHub
 
 on: [push]
 
@@ -6,18 +6,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        # Test Against LTS Java Versions
-        java: [ 8, 11 ]
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Java Version
+      - name: Set up Java 8 Version
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 8
 
       - name: Cache Maven Modules
         uses: actions/cache@v1
@@ -29,3 +25,9 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B clean install --file pom.xml
+
+      - name: Publish to GitHub Packages Apache Maven
+        run: mvn deploy -DskipTests=true
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
+
