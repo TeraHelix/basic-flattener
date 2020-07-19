@@ -1,0 +1,53 @@
+
+name: ODA International Subscriptions
+inputPath: xml
+
+outputTables:
+  - name: oda-flattened
+
+    outputFile: output/oda-flattened.csv
+    definition:
+
+      - columnName: IATI-Generated-Time
+        sourceType: xpath
+        sourceDef: iati-activities/@generated-datetime
+
+      - columnName: IATI-Items
+        sourceType: xpath
+        sourceDef: iati-activities/iati-activity
+        explode: true
+
+        repeatingList:
+          - columnName: IATI-Identifier
+            sourceType: xpath
+            sourceDef: iati-identifier
+
+          - columnName: IATI-Title
+            sourceType: xpath
+            sourceDef: title/narrative
+
+          - columnName: Contact-Info-Email
+            sourceType: xpath
+            sourceDef: contact-info/email
+
+          - columnName: Budget-Items
+            sourceType: xpath
+            sourceDef: budget
+            explode: true
+            repeatingList:
+              - columnName: Budget-Period-Start
+                sourceType: xpath
+                sourceDef: period-start/@iso-date
+
+              - columnName: Budget-Period-End
+                sourceType: xpath
+                sourceDef: period-end/@iso-date
+
+              - columnName: Budget-Value-Date
+                sourceType: xpath
+                sourceDef: value/@value-date
+
+              - columnName: Budget-Value-Amount
+                sourceType: xpath
+                sourceDef: value/text()
+

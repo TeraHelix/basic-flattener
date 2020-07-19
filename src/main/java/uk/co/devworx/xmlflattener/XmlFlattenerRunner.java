@@ -18,6 +18,27 @@ public class XmlFlattenerRunner
 {
     private static final Logger logger = LogManager.getLogger(XmlFlattenerRunner.class);
 
+    /**
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String... args) throws Exception
+    {
+        if (args.length < 1)
+        {
+            String msg = "The class expects 1 parameter: \n" +
+                    "[0] - The YAML File describing the flattening criteria \n" +
+                    "\nYou have specified: " + Arrays.toString(args);
+            System.err.println(msg);
+            System.exit(1);
+            return;
+        }
+
+        final XmlFlattenerRunner runner = new XmlFlattenerRunner(Paths.get(args[0]));
+        runner.execute();
+
+    }
+
     private final Path spec;
     private final Timestamp batchTime;
     private final Map<String, XmlFlattenerSpec> extractorSpecs;
@@ -60,27 +81,7 @@ public class XmlFlattenerRunner
         }
     }
 
-    /**
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String... args) throws Exception
-    {
-        if (args.length < 1)
-        {
-            String msg = "The class expects 1 parameter: \n" +
-                    "[0] - The JSON File describing the flattening criteria \n" +
-                    "\nYou have specified: " + Arrays.toString(args);
-            System.err.println(msg);
-            System.exit(1);
-            return;
-        }
 
-        final XmlFlattenerRunner runner = new XmlFlattenerRunner(Paths.get(args[0]));
-        runner.execute();
-
-
-    }
 
 
 }
