@@ -30,11 +30,19 @@ outputTables:
             sourceType: xpath
             sourceDef: contact-info/email
 
+          - columnName: Capital-Spend
+            sourceType: xpath
+            sourceDef: capital-spend/@percentage
+
           - columnName: Budget-Items
             sourceType: xpath
             sourceDef: budget
             explode: true
             repeatingList:
+              - columnName: Budget-Period-Status
+                sourceType: xpath
+                sourceDef: "@status"
+
               - columnName: Budget-Period-Start
                 sourceType: xpath
                 sourceDef: period-start/@iso-date
@@ -51,3 +59,23 @@ outputTables:
                 sourceType: xpath
                 sourceDef: value/text()
 
+          - columnName: Transaction-Items
+              sourceType: xpath
+              sourceDef: transaction
+              explode: true
+              repeatingList:
+                - columnName: Transaction-Type-Code
+                  sourceType: xpath
+                  sourceDef: transaction-type/@code
+
+                - columnName: Transaction-Date
+                  sourceType: xpath
+                  sourceDef: transaction-date/@iso-date
+
+                - columnName: Transaction-Value-Date
+                  sourceType: xpath
+                  sourceDef: value/@value-date
+
+                - columnName: Transaction-Budget-Value
+                  sourceType: xpath
+                  sourceDef: value/text()

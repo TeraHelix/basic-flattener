@@ -34,7 +34,7 @@ public class XmlPathsTest
 		for (int i = 0; i < eval1.getLength() ; i++)
 		{
 			String eval2 = (String)xpath2_comp.evaluate(eval1.item(i), XPathConstants.STRING);
-			logger.info("eval - [" + i + "] - " + eval2);
+			logger.debug("eval - [" + i + "] - " + eval2);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class XmlPathsTest
 		for (int i = 0; i < eval1.getLength() ; i++)
 		{
 			String eval2 = (String)xpath2_comp.evaluate(eval1.item(i), XPathConstants.STRING);
-			logger.info("eval - [" + i + "] - " + eval2);
+			logger.debug("eval - [" + i + "] - " + eval2);
 		}
 
 	}

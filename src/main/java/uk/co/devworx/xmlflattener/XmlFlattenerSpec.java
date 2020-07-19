@@ -29,6 +29,7 @@ public class XmlFlattenerSpec
     private final String name;
     private final Path originatingFile;
     private final Path inputPath;
+    private final Path rootPath;
 
     private final Map<String, FlattenerListItem> specListItems;
 
@@ -46,6 +47,7 @@ public class XmlFlattenerSpec
         this.name = name;
         this.specListItems = mapListItemsP;
         this.inputPath = inputPath;
+        this.rootPath = originatingFile.getParent();
         specListItems.values().forEach(m ->
         {
             m.setParent(this);
@@ -59,6 +61,11 @@ public class XmlFlattenerSpec
     public Path getInputPath()
     {
         return inputPath;
+    }
+
+    public Path getRootPath()
+    {
+        return rootPath;
     }
 
     public Path getOriginatingFiles()

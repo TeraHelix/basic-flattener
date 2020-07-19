@@ -40,7 +40,7 @@ public class XmlFlattener
         {
 
             final List<FlattenerListItem> flattenerListItems = getItemsRequiringResolution(spec);
-            logger.info("There are a total of " + flattenerListItems.size() + " that needs expansion.");
+            logger.info("There are a total of " + flattenerListItems.size() + " that needs pre-processing expansion.");
             if(flattenerListItems.isEmpty() == true)
             {
                 return;
@@ -106,13 +106,15 @@ public class XmlFlattener
     static void ___produceCSVFlattens_Local(final Timestamp batchTime, final XmlFlattenerSpec spec)
     {
         final Path inputPath = spec.getInputPath();
+        final Path rootPath = spec.getRootPath();
+
         try
         {
             final Map<String, FlattenerListItem> mapListItemMap = spec.getSpecListItems();
             final Collection<FlattenerListItem> flattenerListItems = mapListItemMap.values();
 
             for(FlattenerListItem m : flattenerListItems){
-                m.setUpCSVPrinterAndContainers(inputPath);
+                m.setUpCSVPrinterAndContainers(rootPath);
                 m.setMatchesExistingTable(false);
             }
             final Path XmlInputsDirectory = getRelativeOrAbsolutePath(inputPath, XMLFlattener_PropertyManager.XmlFlattener_LocalRunXMLDirectory);
@@ -139,10 +141,11 @@ public class XmlFlattener
                 }
                 catch (SAXException | IOException ex)
                 {
-                    handleAndLogBrokenXMLInFeed(inputPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
+                    handleAndLogBrokenXMLInFeed(rootPath, spec, rows, ex, "Unable to read the XML for the file for ", data);
                     continue;
                 }
-                if(paramBagPre == null){
+                if(paramBagPre == null)
+                {
                     throw new RuntimeException("Found a null XML document - this is not expected");
                 }
                 final ParameterBag paramBag2 = paramBagPre;
@@ -158,7 +161,8 @@ public class XmlFlattener
                 }
             }
             logger.info("Now processed a total of " + rows + " | Closing all items ");
-            for(FlattenerListItem m : flattenerListItems){
+            for(FlattenerListItem m : flattenerListItems)
+            {
                 m.close();
             }
         }

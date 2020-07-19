@@ -80,7 +80,8 @@ public class LayerRowsContainer
     {
         if(xmlFlattenerColumnsP == null || xmlFlattenerColumnsP.isEmpty() == true)
         {
-            throw new IllegalArgumentException("Layer - " + layer + " - Name - " + name + " - expandResolvedItems - " + expandResolvedItems + " - Has Column Length of " + xmlFlattenerColumnsP.size());
+            String report = "You are required to have at least 1 column per 'level' in your XML-Flattener definition. It would appear that the '" + name + "' definition does not have any (non exploded) columns";
+            throw new IllegalArgumentException(report);
         }
 
         this.layer = layer;
@@ -434,11 +435,11 @@ public class LayerRowsContainer
         boolean hasAddedAValue = false;
         List<NodeList> nodeLists = col.getRecursiveParentNodeList(paramBag);
 
-        logger.info("Total Recursive Parent Node Lists for - " + col.getColumnName() + " - " + nodeLists.size());
+        logger.debug("Total Recursive Parent Node Lists for - " + col.getColumnName() + " - " + nodeLists.size());
 
         for(NodeList nl : nodeLists)
         {
-            logger.info("Sub Node List Length - " + nl.getLength());
+            logger.debug("Sub Node List Length - " + nl.getLength());
 
             for(int i = 0; i < nl.getLength(); i++)
             {

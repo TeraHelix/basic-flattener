@@ -51,9 +51,9 @@ public class LayerRow
             newList.add(0, val.trim());
             newColList.add(0, col);
 
-            logger.info("val : + " + val);
-            logger.info("col : + " + col.getColumnName());
-            logger.info("newList : + " + newList);
+            logger.debug("val : + " + val);
+            logger.debug("col : + " + col.getColumnName());
+            logger.debug("newList : + " + newList);
 
             derivedRows.add(new LayerRow(newList, newColList));
 

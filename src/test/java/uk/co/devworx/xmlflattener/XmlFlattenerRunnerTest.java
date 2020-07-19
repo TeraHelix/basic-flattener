@@ -39,8 +39,8 @@ public class XmlFlattenerRunnerTest
 			try
 			{
 				String csv = new String(Files.readAllBytes(p));
-				logger.info("\n\n" + p.toAbsolutePath());
-				logger.info("\n\n" + csv);
+				logger.debug("\n\n" + p.toAbsolutePath());
+				logger.debug("\n\n" + csv);
 			}
 			catch (IOException e)
 			{

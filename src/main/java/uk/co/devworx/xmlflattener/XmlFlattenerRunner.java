@@ -49,11 +49,11 @@ public class XmlFlattenerRunner
 
         batchTime = new Timestamp(System.currentTimeMillis());
         logger.info("Reading from the specification : " + spec.toAbsolutePath());
-        logger.info("Batch time is " + batchTime);
+        logger.debug("Batch time is " + batchTime);
 
         extractorSpecs = XmlFlattenerSpecFactory.parse(spec);
 
-        logger.info("Read a total - " + extractorSpecs.size() + " | " + extractorSpecs.keySet());
+        logger.info("Read a total - " + extractorSpecs.size() + " | keys/names: " + extractorSpecs.keySet());
     }
 
     public void execute()
@@ -77,7 +77,7 @@ public class XmlFlattenerRunner
 
         for(FlattenerListItem mi : mapItems)
         {
-            logger.info(mi.getMapName() + " -> " + mi.getCsvRowsWritten() + " -> " + mi.getOutputCSVFile().toAbsolutePath());
+            logger.info("Output Table - " + mi.getMapName() + " - " + mi.getCsvRowsWritten() + " CSV Rows - " + mi.getOutputCSVFile().toAbsolutePath());
         }
     }
 

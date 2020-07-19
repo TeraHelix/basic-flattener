@@ -95,7 +95,10 @@ public class XmlFlattenerSpecFactory
 										   allColumns, allExplodeItems);
 			}
 
-			results.put(name, new XmlFlattenerSpec(yamlFile, name, mapListItems,inputPath));
+			results.put(name, new XmlFlattenerSpec(yamlFile,
+												   name,
+												   mapListItems,
+												   inputPath));
 		}
 
 
