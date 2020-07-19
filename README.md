@@ -40,7 +40,7 @@ The above commands will produce the `examples/Hello-World/output/continents-flat
 The XML Flattener is a tool that can assist with the following common data use-cases:
 
 * Data extraction over directories containing large numbers of XML files to a form which can then be further analysed by tools such as R Studio, Python Pandas or Excel.
-* Transforming deeply nested XML structures to a shape that is consumable by libraries optimised for rectangular data set (e.g. machine learning libraries or even just end-user spreadsheets).
+* Transforming deeply nested XML structures to a shape that is consumable by libraries optimised for rectangular data sets (e.g. machine learning libraries or even just end-user spreadsheets).
 * Data loading use-cases where the XML data needs to be flattened such that it can be consumed by relational databases and queried via SQL.
 
 If you wish to build this project locally (rather than using the pre-compiled binary) please consult the [README-Building.md](README-Building.md) guide.
@@ -84,6 +84,8 @@ Consider the [Input XML](examples/Hello-World/xml/input-01.xml) which lists a nu
 ```
 
 In order to perform analysis on this XML it needs to be flattened to the following CSV file:
+
+![Alt text](flattened-csv-hello-world.png?raw=true "Output CSV Example")
 
 This can be accomplished with the following YAML flattening specification
 
