@@ -123,7 +123,7 @@ outputTables:
 
 * *[Hello-World](examples/Hello-World/README.md)* - a showcase of the basic feature set available in this tool. Including standard XPath based extraction, multiple rows for repeating lists and dynamic column generation for variable element attributes.
 
-* *["ODA-International-Subscriptions"](examples/ODA-International-Subscriptions/README.md)* -
+* *[ODA-International-Subscriptions](examples/ODA-International-Subscriptions/README.md)* -
 a real-world example data set from the UK Government (https://data.gov.uk/dataset/e3885716-5e9b-4e29-8dd3-b1c649fb91ed/overseas-development-assistance-oda-international-subscriptions) as demonstrating the use of nested repeating lists and how it is possible to create multiple flattening specifications for the same input XMLs.
  
  
