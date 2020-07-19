@@ -7,6 +7,9 @@ The YAML file describing the flattening steps can be found here:  [oda-flattenin
 == Running the Example
 
 ```
-java -jar ../../target/xml-flattener-exec.jar ./oda-flattening.yml
+java -jar ../../target/xml-flattener-exec.jar ./oda-flattening-budgets.yml
+
+java -jar ../../target/xml-flattener-exec.jar ./oda-flattening-transactions.yml
+
 ```
 

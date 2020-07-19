@@ -1,0 +1,57 @@
+
+name: ODA International Subscriptions
+inputPath: xml
+
+outputTables:
+
+  - name: oda-flattened-transactions
+  
+    outputFile: output/oda-flattened-transactions.csv
+    definition:
+
+      - columnName: IATI-Generated-Time
+        sourceType: xpath
+        sourceDef: iati-activities/@generated-datetime
+
+      - columnName: IATI-Items
+        sourceType: xpath
+        sourceDef: iati-activities/iati-activity
+        explode: true
+
+        repeatingList:
+          - columnName: IATI-Identifier
+            sourceType: xpath
+            sourceDef: iati-identifier
+
+          - columnName: IATI-Title
+            sourceType: xpath
+            sourceDef: title/narrative
+
+          - columnName: Contact-Info-Email
+            sourceType: xpath
+            sourceDef: contact-info/email
+
+          - columnName: Capital-Spend
+            sourceType: xpath
+            sourceDef: capital-spend/@percentage
+
+          - columnName: Transaction-Items
+            sourceType: xpath
+            sourceDef: transaction
+            explode: true
+            repeatingList:
+              - columnName: Transaction-Type-Code
+                sourceType: xpath
+                sourceDef: transaction-type/@code
+
+              - columnName: Transaction-Date
+                sourceType: xpath
+                sourceDef: transaction-date/@iso-date
+
+              - columnName: Transaction-Value-Date
+                sourceType: xpath
+                sourceDef: value/@value-date
+
+              - columnName: Transaction-Value
+                sourceType: xpath
+                sourceDef: value/text()

@@ -3,9 +3,10 @@ name: ODA International Subscriptions
 inputPath: xml
 
 outputTables:
-  - name: oda-flattened
 
-    outputFile: output/oda-flattened.csv
+  - name: oda-flattened-budgets
+
+    outputFile: output/oda-flattened-budgets.csv
     definition:
 
       - columnName: IATI-Generated-Time
@@ -58,24 +59,3 @@ outputTables:
               - columnName: Budget-Value-Amount
                 sourceType: xpath
                 sourceDef: value/text()
-
-          - columnName: Transaction-Items
-              sourceType: xpath
-              sourceDef: transaction
-              explode: true
-              repeatingList:
-                - columnName: Transaction-Type-Code
-                  sourceType: xpath
-                  sourceDef: transaction-type/@code
-
-                - columnName: Transaction-Date
-                  sourceType: xpath
-                  sourceDef: transaction-date/@iso-date
-
-                - columnName: Transaction-Value-Date
-                  sourceType: xpath
-                  sourceDef: value/@value-date
-
-                - columnName: Transaction-Budget-Value
-                  sourceType: xpath
-                  sourceDef: value/text()
