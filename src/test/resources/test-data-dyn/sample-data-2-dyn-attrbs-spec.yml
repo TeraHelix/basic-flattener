@@ -1,6 +1,6 @@
 
 name: Sample Data Dynamic Attribute Flattener
-inputPath: src/test/resources/test-data-dyn
+inputPath: .
 
 outputTables:
   - name: table-explode
@@ -14,7 +14,7 @@ outputTables:
     - columnName: element_0_key_dyn_
       sourceType: dynAttribute
       sourceDef: root/element-0
-      attributeFilter: ".*" # A regex for all the columns on this item.
+      attributeFilter: "runExplodeTest.*" # A regex for all the columns on this item.
 
     - columnName: element_0_key_2
       sourceType: xpath

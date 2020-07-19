@@ -54,7 +54,7 @@ public class XmlFlattenerSpecFactory
 	public static Map<String, XmlFlattenerSpec> parse(Path yamlFile)
 	{
 		final Yaml_Spec yamlSpec = parseYamlSpec(yamlFile);
-		final Path inputPath = Paths.get(yamlSpec.getInputPath());
+		final Path inputPath = yamlFile.getParent().resolve(yamlSpec.getInputPath());
 
 		final Map<String, XmlFlattenerSpec> results = new LinkedHashMap<>();
 		final AtomicInteger overallColumnOrderSeq = new AtomicInteger();
