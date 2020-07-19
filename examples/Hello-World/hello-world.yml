@@ -1,0 +1,27 @@
+name: Hello World Example
+inputPath: xml
+outputTables:
+  - name: continents-flattened
+    outputFile: output/continents-flattened.csv
+    definition:
+      - columnName: Title
+        sourceType: xpath
+        sourceDef: root/title
+      - columnName: Source
+        sourceType: xpath
+        sourceDef: root/source
+      - columnName: Description
+        sourceType: xpath
+        sourceDef: root/description
+      - columnName: Continents
+        sourceType: xpath
+        sourceDef: root/continents/continent
+        explode: true # Create a row for each element
+        repeatingList:
+          - columnName: Continent-Attrb-
+            sourceType: dynAttribute
+            sourceDef: "."
+            attributeFilter: ".*"
+          - columnName: Continent-Name
+            sourceType: xpath
+            sourceDef: name/text()

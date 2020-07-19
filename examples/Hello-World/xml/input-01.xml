@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+    <title>Hello World</title>
+    <source>https://en.wikipedia.org/wiki/Continent</source>
+    <description>Simple Example of Features</description>
+    <continents>
+        <continent area="30370000" population="1287920000" most-populous-city="Lagos, Nigeria">
+            <name>Africa</name>
+        </continent>
+        <continent area="14000000" population="4490" most-populous-city="McMurdo Station" countries="0">
+            <name>Antarctica</name>
+        </continent>
+        <continent area="44579000" population="4545133000" most-populous-city="Shanghai, China">
+            <name>Asia</name>
+        </continent>
+        <continent area="10180000" population="742648000" most-populous-city="Moscow, Russia" demonym="European">
+            <name>Europe</name>
+        </continent>
+        <continent area="24709000" population="587615000" most-populous-city="Mexico City, Mexico">
+            <name>North America</name>
+        </continent>
+        <continent area="8600000" population="41261000" most-populous-city="Sydney, Australia">
+            <name>Australia</name>
+        </continent>
+        <continent area="17840000" population="428240000" most-populous-city="São Paulo, Brazil">
+            <name>South America</name>
+        </continent>
+    </continents>
+</root>

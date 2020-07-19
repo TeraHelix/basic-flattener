@@ -193,8 +193,36 @@ class FlattenerListItem implements Closeable
      */
     public boolean containsDynamicColunns()
     {
-        Optional<XmlFlattenerSpecColumn> items = columns.stream().filter(col -> col.getType().equals(XmlFlattenerSourceType.dynAttribute)).findAny();
-        return items.isPresent();
+        boolean thisItem = containsDynamicColunns(columns);
+        if(thisItem == true) return true;
+
+        for(XmlFlattenerSpecColumn col : columns)
+        {
+            if(col.getType().equals(XmlFlattenerSourceType.dynAttribute))
+            {
+                return true;
+            }
+        }
+
+        for(XmlFlattenerExplodeItem expl : explodeItems)
+        {
+            boolean bl = containsDynamicColunns(expl.getAllColumns());
+            if(bl == true) return true;
+        }
+
+        return false;
+    }
+
+    private static boolean containsDynamicColunns(List<XmlFlattenerSpecColumn> cols)
+    {
+        for(XmlFlattenerSpecColumn col : cols)
+        {
+            if(col.getType().equals(XmlFlattenerSourceType.dynAttribute))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public long getXmlsProcessed()
