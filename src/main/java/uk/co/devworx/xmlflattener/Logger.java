@@ -28,6 +28,7 @@ public class Logger
 
     public void debug(String s)
     {
+        if(!isDebugEnabled()) return;
         String val = String.format("%s - [DEBUG] - %s", Instant.now(), s);
         System.out.println(val);
     }
