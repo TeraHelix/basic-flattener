@@ -1,0 +1,450 @@
+
+name: SP Global Flattening
+inputPath: ./HNB_Fixed.xml
+
+outputTables:
+
+  - name: trade-rows
+
+    outputFile: output/trade-rows.csv
+    definition:
+
+      - columnName: ReportName
+        sourceType: xpath
+        sourceDef: ReportResponse/ReportStatus/@reportName
+
+      - columnName: AsOfDate
+        sourceType: xpath
+        sourceDef: ReportResponse/MarkToMarketReport/@asOfDate
+
+      - columnName: Currency
+        sourceType: xpath
+        sourceDef: ReportResponse/MarkToMarketReport/@currency
+
+      - columnName: TradeRow
+        sourceType: xpath
+        sourceDef: ReportResponse/MarkToMarketReport/TradeRow
+        explode: true
+
+        repeatingList:
+
+          - columnName: book
+            sourceType: xpath
+            sourceDef: "@book"
+
+          - columnName: calendar
+            sourceType: xpath
+            sourceDef: "@calendar"
+
+          - columnName: comments
+            sourceType: xpath
+            sourceDef: "@comments"
+
+          - columnName: contractualQuantity
+            sourceType: xpath
+            sourceDef: "@contractualQuantity"
+
+          - columnName: counterparty
+            sourceType: xpath
+            sourceDef: "@counterparty"
+
+          - columnName: counterpartyExternalId10
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId10"
+
+          - columnName: counterpartyExternalId11
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId11"
+
+          - columnName: counterpartyExternalId12
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId12"
+
+          - columnName: counterpartyExternalId2
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId2"
+
+          - columnName: counterpartyExternalId5
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId5"
+
+          - columnName: counterpartyExternalId6
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId6"
+
+          - columnName: counterpartyExternalId8
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId8"
+
+          - columnName: counterpartyStatus
+            sourceType: xpath
+            sourceDef: "@counterpartyStatus"
+
+          - columnName: tradeCurrency
+            sourceType: xpath
+            sourceDef: "@currency"
+
+          - columnName: endDate
+            sourceType: xpath
+            sourceDef: "@endDate"
+
+          - columnName: externalId
+            sourceType: xpath
+            sourceDef: "@externalId"
+
+          - columnName: firstFixingDate
+            sourceType: xpath
+            sourceDef: "@firstFixingDate"
+
+          - columnName: forwardPrice
+            sourceType: xpath
+            sourceDef: "@forwardPrice"
+
+          - columnName: fx
+            sourceType: xpath
+            sourceDef: "@fx"
+
+          - columnName: greeksDeltaLots
+            sourceType: xpath
+            sourceDef: "@greeksDeltaLots"
+
+          - columnName: greeksGammaLots
+            sourceType: xpath
+            sourceDef: "@greeksGammaLots"
+
+          - columnName: groupId
+            sourceType: xpath
+            sourceDef: "@groupId"
+
+          - columnName: holidayCalendar
+            sourceType: xpath
+            sourceDef: "@holidayCalendar"
+
+          - columnName: intrinsicValue
+            sourceType: xpath
+            sourceDef: "@intrinsicValue"
+
+          - columnName: lastFixingDate
+            sourceType: xpath
+            sourceDef: "@lastFixingDate"
+
+          - columnName: lastModifiedDate
+            sourceType: xpath
+            sourceDef: "@lastModifiedDate"
+
+          - columnName: lastModifiedTime
+            sourceType: xpath
+            sourceDef: "@lastModifiedTime"
+
+          - columnName: logDate
+            sourceType: xpath
+            sourceDef: "@logDate"
+
+          - columnName: logTime
+            sourceType: xpath
+            sourceDef: "@logTime"
+
+          - columnName: markToMarket
+            sourceType: xpath
+            sourceDef: "@markToMarket"
+
+          - columnName: market
+            sourceType: xpath
+            sourceDef: "@market"
+
+          - columnName: marketPrice
+            sourceType: xpath
+            sourceDef: "@marketPrice"
+
+          - columnName: maturityDate
+            sourceType: xpath
+            sourceDef: "@maturityDate"
+
+          - columnName: mtmPortfolioCcy
+            sourceType: xpath
+            sourceDef: "@mtmPortfolioCcy"
+
+          - columnName: nearbyMonth
+            sourceType: xpath
+            sourceDef: "@nearbyMonth"
+
+          - columnName: netQuantity
+            sourceType: xpath
+            sourceDef: "@netQuantity"
+
+          - columnName: netQuantityUnits
+            sourceType: xpath
+            sourceDef: "@netQuantityUnits"
+
+          - columnName: nonDiscountedIntrinsicValue
+            sourceType: xpath
+            sourceDef: "@nonDiscountedIntrinsicValue"
+
+          - columnName: nondiscountedMtm
+            sourceType: xpath
+            sourceDef: "@nondiscountedMtm"
+
+          - columnName: nondiscountedMtmCcy
+            sourceType: xpath
+            sourceDef: "@nondiscountedMtmCcy"
+
+          - columnName: paymentDate
+            sourceType: xpath
+            sourceDef: "@paymentDate"
+
+          - columnName: paymentFrequency
+            sourceType: xpath
+            sourceDef: "@paymentFrequency"
+
+          - columnName: position
+            sourceType: xpath
+            sourceDef: "@position"
+
+          - columnName: positionBcf
+            sourceType: xpath
+            sourceDef: "@positionBcf"
+
+          - columnName: positionDekaTherm
+            sourceType: xpath
+            sourceDef: "@positionDekaTherm"
+
+          - columnName: positionGj
+            sourceType: xpath
+            sourceDef: "@positionGj"
+
+          - columnName: positionIncreasedPrecision
+            sourceType: xpath
+            sourceDef: "@positionIncreasedPrecision"
+
+          - columnName: positionLots
+            sourceType: xpath
+            sourceDef: "@positionLots"
+
+          - columnName: positionMcf
+            sourceType: xpath
+            sourceDef: "@positionMcf"
+
+          - columnName: positionMmbtu
+            sourceType: xpath
+            sourceDef: "@positionMmbtu"
+
+          - columnName: positionMmcf
+            sourceType: xpath
+            sourceDef: "@positionMmcf"
+
+          - columnName: positionMwh
+            sourceType: xpath
+            sourceDef: "@positionMwh"
+
+          - columnName: positionType
+            sourceType: xpath
+            sourceDef: "@positionType"
+
+          - columnName: price
+            sourceType: xpath
+            sourceDef: "@price"
+
+          - columnName: pricedMTM
+            sourceType: xpath
+            sourceDef: "@pricedMTM"
+
+          - columnName: pricingDates
+            sourceType: xpath
+            sourceDef: "@pricingDates"
+
+          - columnName: quantityFrequency
+            sourceType: xpath
+            sourceDef: "@quantityFrequency"
+
+          - columnName: quantityRate
+            sourceType: xpath
+            sourceDef: "@quantityRate"
+
+          - columnName: rollConvention
+            sourceType: xpath
+            sourceDef: "@rollConvention"
+
+          - columnName: settleRuleConvention
+            sourceType: xpath
+            sourceDef: "@settleRuleConvention"
+
+          - columnName: settleRules
+            sourceType: xpath
+            sourceDef: "@settleRules"
+
+          - columnName: settlementQuantity
+            sourceType: xpath
+            sourceDef: "@settlementQuantity"
+
+          - columnName: settlementUnits
+            sourceType: xpath
+            sourceDef: "@settlementUnits"
+
+          - columnName: startDate
+            sourceType: xpath
+            sourceDef: "@startDate"
+
+          - columnName: term
+            sourceType: xpath
+            sourceDef: "@term"
+
+          - columnName: timeValue
+            sourceType: xpath
+            sourceDef: "@timeValue"
+
+          - columnName: totalQuantity
+            sourceType: xpath
+            sourceDef: "@totalQuantity"
+
+          - columnName: totalQuantityIncreasedPrecision
+            sourceType: xpath
+            sourceDef: "@totalQuantityIncreasedPrecision"
+
+          - columnName: totalQuantityIncreasedPrecision2dp
+            sourceType: xpath
+            sourceDef: "@totalQuantityIncreasedPrecision2dp"
+
+          - columnName: tradeConfirmationComments
+            sourceType: xpath
+            sourceDef: "@tradeConfirmationComments"
+
+          - columnName: tradeConfirmationStatus
+            sourceType: xpath
+            sourceDef: "@tradeConfirmationStatus"
+
+          - columnName: tradeDate
+            sourceType: xpath
+            sourceDef: "@tradeDate"
+
+          - columnName: tradeId
+            sourceType: xpath
+            sourceDef: "@tradeId"
+
+          - columnName: tradeType
+            sourceType: xpath
+            sourceDef: "@tradeType"
+
+          - columnName: trader
+            sourceType: xpath
+            sourceDef: "@trader"
+
+          - columnName: type
+            sourceType: xpath
+            sourceDef: "@type"
+
+          - columnName: underlying
+            sourceType: xpath
+            sourceDef: "@underlying"
+
+          - columnName: units
+            sourceType: xpath
+            sourceDef: "@units"
+
+          - columnName: unpricedMTM
+            sourceType: xpath
+            sourceDef: "@unpricedMTM"
+
+          - columnName: counterpartyExternalId15
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId15"
+
+          - columnName: counterpartyExternalId3
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId3"
+
+          - columnName: counterpartyExternalId
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId"
+
+          - columnName: counterpartyExternalId13
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId13"
+
+          - columnName: counterpartyExternalId14
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId14"
+
+          - columnName: counterpartyExternalId16
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId16"
+
+          - columnName: counterpartyExternalId17
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId17"
+
+          - columnName: counterpartyExternalId18
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId18"
+
+          - columnName: counterpartyExternalId4
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId4"
+
+          - columnName: counterpartyExternalId7
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId7"
+
+          - columnName: counterpartyExternalId9
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId9"
+
+          - columnName: discountFactor
+            sourceType: xpath
+            sourceDef: "@discountFactor"
+
+          - columnName: counterpartyExternalId19
+            sourceType: xpath
+            sourceDef: "@counterpartyExternalId19"
+
+          - columnName: positionBbl
+            sourceType: xpath
+            sourceDef: "@positionBbl"
+
+          - columnName: positionGal
+            sourceType: xpath
+            sourceDef: "@positionGal"
+
+          - columnName: positionKl
+            sourceType: xpath
+            sourceDef: "@positionKl"
+
+          - columnName: positionL
+            sourceType: xpath
+            sourceDef: "@positionL"
+
+          - columnName: exerciseType
+            sourceType: xpath
+            sourceDef: "@exerciseType"
+
+          - columnName: payoutType
+            sourceType: xpath
+            sourceDef: "@payoutType"
+
+          - columnName: premiumSettleDate
+            sourceType: xpath
+            sourceDef: "@premiumSettleDate"
+
+          - columnName: premiumWithSettlement
+            sourceType: xpath
+            sourceDef: "@premiumWithSettlement"
+
+          - columnName: strike
+            sourceType: xpath
+            sourceDef: "@strike"
+
+          - columnName: totalPremium
+            sourceType: xpath
+            sourceDef: "@totalPremium"
+
+          - columnName: forwardPriceLeg2
+            sourceType: xpath
+            sourceDef: "@forwardPriceLeg2"
+
+          - columnName: marketSpread
+            sourceType: xpath
+            sourceDef: "@marketSpread"
+
+          - columnName: useCommonPricing
+            sourceType: xpath
+            sourceDef: "@useCommonPricing"
+
