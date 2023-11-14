@@ -21,7 +21,7 @@
 
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
 
-        <jackson.version>2.11.1</jackson.version>
+        <jackson.version>2.15.3</jackson.version>
 
         <maven.compiler.initial.memory>1024M</maven.compiler.initial.memory>
         <maven.compiler.max.memory>2048M</maven.compiler.max.memory>
@@ -128,16 +128,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>de.vandermeer</groupId>
             <artifactId>asciitable</artifactId>
         </dependency>
@@ -177,19 +167,7 @@
 				<scope>test</scope>
 			</dependency>
 
-			<dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>2.13.2</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>2.13.2</version>
-            </dependency>
- 
- 
+
 	        <dependency>
 			    <groupId>org.apache.commons</groupId>
 			    <artifactId>commons-csv</artifactId>
@@ -201,7 +179,6 @@
                 <artifactId>asciitable</artifactId>
                 <version>0.3.2</version>
             </dependency>
-
 
         </dependencies>
         

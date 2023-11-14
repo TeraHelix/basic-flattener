@@ -1,7 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
@@ -9,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.FileTime;
-import java.sql.*;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -19,7 +17,7 @@ import java.util.stream.Stream;
  */
 public class XmlFlattener
 {
-    private static final Logger logger = LogManager.getLogger(XmlFlattener.class);
+    private static final Logger logger = Logger.getLogger(XmlFlattener.class);
     private static final boolean XmlFlattener_EnableParallelJavaLambdaStreams = XMLFlattener_PropertyManager.XmlFlattener_EnableParallelJavaLambdaStreams;
 
     public static void produceCSVFlattens(final Timestamp batchTime, final XmlFlattenerSpec spec)

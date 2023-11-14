@@ -3,8 +3,6 @@ package uk.co.devworx.xmlflattener;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_LongestLine;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.*;
@@ -15,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class LayerRow
 {
-    private static final Logger logger = LogManager.getLogger(LayerRow.class);
+    private static final Logger logger = Logger.getLogger(LayerRow.class);
     private final List<XmlFlattenerSpecColumn> rowColumns;
     private final List<String> rowItems;
 

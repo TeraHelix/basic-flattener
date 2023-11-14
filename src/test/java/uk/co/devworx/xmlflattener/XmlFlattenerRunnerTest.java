@@ -1,6 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,7 +10,7 @@ import java.util.stream.Stream;
 
 public class XmlFlattenerRunnerTest
 {
-	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(XmlFlattenerRunnerTest.class);
+	private static final Logger logger = Logger .getLogger(XmlFlattenerRunnerTest.class);
 
 	@Test
 	public void runFlatteningTest() throws Exception

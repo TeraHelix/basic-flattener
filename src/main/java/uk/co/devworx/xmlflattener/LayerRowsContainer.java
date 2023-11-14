@@ -1,7 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -22,7 +20,7 @@ import java.util.stream.Stream;
  */
 public class LayerRowsContainer
 {
-    private static final Logger logger = LogManager.getLogger(LayerRowsContainer.class);
+    private static final Logger logger = Logger.getLogger(LayerRowsContainer.class);
     private static final boolean XmlFlattener_EnableParallelJavaLambdaStreams = XMLFlattener_PropertyManager.XmlFlattener_EnableParallelJavaLambdaStreams;
 
     private final int layer;

@@ -4,14 +4,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.logging.log4j.LogManager;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class XmlFlattenerSpecFactory
 {
-	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(XmlFlattenerSpecFactory.class);
+	private static final Logger logger = Logger.getLogger(XmlFlattenerSpecFactory.class);
 
 	private XmlFlattenerSpecFactory()
 	{

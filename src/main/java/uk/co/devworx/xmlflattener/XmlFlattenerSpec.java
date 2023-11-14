@@ -2,7 +2,6 @@ package uk.co.devworx.xmlflattener;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-import org.apache.logging.log4j.LogManager;
 import org.w3c.dom.*;
 
 import javax.xml.xpath.*;
@@ -21,7 +20,7 @@ import java.util.stream.Stream;
  */
 public class XmlFlattenerSpec
 {
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(XmlFlattenerSpec.class);
+    private static final Logger logger = Logger.getLogger(XmlFlattenerSpec.class);
 
     static final XPathFactory xPathFactory = XPathFactory.newInstance();
     static final XPath xPath = xPathFactory.newXPath();
@@ -124,7 +123,7 @@ enum XmlFlattenerSourceType
 
 class FlattenerListItem implements Closeable
 {
-    private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(FlattenerListItem.class);
+    private static final Logger logger = Logger.getLogger(FlattenerListItem.class);
     private static final Boolean XmlFlattener_EnableParallelJavaLambdaStreams = XMLFlattener_PropertyManager.XmlFlattener_EnableParallelJavaLambdaStreams;
     private volatile XmlFlattenerSpec parent; //this is set later when the parent is added
 
@@ -484,7 +483,7 @@ class XmlFlattenerExplodeItem
 
 class XmlFlattenerSpecColumn implements Comparable<XmlFlattenerSpecColumn>
 {
-    private static final org.apache.logging.log4j.Logger s_log = LogManager.getLogger(XmlFlattenerSpecColumn.class);
+    private static final Logger s_log = Logger.getLogger(XmlFlattenerSpecColumn.class);
 
     private final Optional<XmlFlattenerExplodeItem> parent;
     private final String columnName;

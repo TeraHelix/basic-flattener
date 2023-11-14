@@ -1,6 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
@@ -14,7 +13,7 @@ import javax.xml.xpath.XPathExpression;
  */
 public class XmlPathsTest
 {
-	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(XmlPathsTest.class);
+	private static final Logger logger = Logger.getLogger(XmlPathsTest.class);
 
 	@Test
 	public void testXmlPaths() throws Exception

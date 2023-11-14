@@ -1,8 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
@@ -16,7 +13,7 @@ import java.util.Map;
  */
 public class XmlFlattenerRunner
 {
-    private static final Logger logger = LogManager.getLogger(XmlFlattenerRunner.class);
+    private static final Logger logger = Logger.getLogger(XmlFlattenerRunner.class);
 
     /**
      * @param args

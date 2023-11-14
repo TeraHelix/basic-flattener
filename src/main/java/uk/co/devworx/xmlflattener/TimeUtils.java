@@ -1,22 +1,18 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Generic utility for converting times.
  */
 public class TimeUtils
 {
-	private static final Logger logger = LogManager.getLogger(TimeUtils.class);
+	private static final Logger logger = Logger.getLogger(TimeUtils.class);
 
 	public static final List<DateTimeFormatter> DateTimeParseCandidates;
 

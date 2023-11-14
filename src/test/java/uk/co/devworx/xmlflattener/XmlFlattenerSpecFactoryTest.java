@@ -1,6 +1,5 @@
 package uk.co.devworx.xmlflattener;
 
-import org.apache.logging.log4j.LogManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import java.util.Map;
 
 public class XmlFlattenerSpecFactoryTest
 {
-	private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(XmlFlattenerSpecFactoryTest.class);
+	private static final Logger logger = Logger.getLogger(XmlFlattenerSpecFactoryTest.class);
 
 	private final Path spec_1 = Paths.get("src/test/resources/test-data/sample-data-1-spec.yml");
 	private final Path spec_2 = Paths.get("src/test/resources/test-data/sample-data-explode-spec.yml");
