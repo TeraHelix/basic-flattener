@@ -23,6 +23,12 @@
 
         <jackson.version>2.15.3</jackson.version>
 
+        <graalvm.version>21.2.0</graalvm.version>
+
+        <mainClass>uk.co.devworx.xmlflattener.XmlFlattenerRunner</mainClass>
+
+        <native.maven.plugin.version>0.9.28</native.maven.plugin.version>
+
         <maven.compiler.initial.memory>1024M</maven.compiler.initial.memory>
         <maven.compiler.max.memory>2048M</maven.compiler.max.memory>
 
@@ -66,6 +72,7 @@
         </pluginManagement>
 
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -79,7 +86,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>uk.co.devworx.xmlflattener.XmlFlattenerRunner</mainClass>
+                                    <mainClass>${mainClass}</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -111,8 +118,32 @@
 			    <artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 
+            <!--
+            <plugin>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
+                <version>${graalvm.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>native-image</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>false</skip>
+                    <imageName>XmlFlattener</imageName>
+                    <buildArgs>
+                        - -no-fallback
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            -->
+
         </plugins>
     </build>
+
 
     <dependencies>
 
@@ -125,6 +156,13 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <version>${graalvm.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

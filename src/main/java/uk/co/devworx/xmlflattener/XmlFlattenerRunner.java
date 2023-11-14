@@ -1,5 +1,9 @@
 package uk.co.devworx.xmlflattener;
 
+import org.graalvm.nativeimage.ImageSingletons;
+import org.graalvm.nativeimage.hosted.Feature;
+import org.graalvm.nativeimage.hosted.RuntimeClassInitialization;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
@@ -7,6 +11,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+
+class XmlFlattenerRunnerFeature implements Feature
+{
+    public void beforeAnalysis(BeforeAnalysisAccess access) {
+        RuntimeClassInitialization.initializeAtBuildTime(Configuration.class.getPackage().getName());
+        try {
+            ImageSingletons.add(Configuration.class, Configuration.loadFromFile());
+        } catch (Throwable ex) {
+            throw new RuntimeException("native-image build-time configuration failed", ex);
+        }
+    }
+}
 
 /**
  * Main bootstrap class for executing the extraction
@@ -21,6 +38,13 @@ public class XmlFlattenerRunner
      */
     public static void main(String... args) throws Exception
     {
+     /*   Configuration configuration = ImageSingletons.lookup(Configuration.class);
+        configuration.handler.handle();*/
+        mainMain(args);
+    }
+
+    public static void mainMain(String... args) throws Exception
+    {
         if (args.length < 1)
         {
             String msg = "The class expects 1 parameter: \n" +
@@ -33,7 +57,6 @@ public class XmlFlattenerRunner
 
         final XmlFlattenerRunner runner = new XmlFlattenerRunner(Paths.get(args[0]));
         runner.execute();
-
     }
 
     private final Path spec;

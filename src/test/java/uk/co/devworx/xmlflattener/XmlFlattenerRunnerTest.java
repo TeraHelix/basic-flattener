@@ -28,7 +28,7 @@ public class XmlFlattenerRunnerTest
 
 	private void runTest(String path) throws Exception
 	{
-		XmlFlattenerRunner.main(path);
+		XmlFlattenerRunner.mainMain(path);
 		Stream<Path> paths = Files.walk(Paths.get("target/sample-data-1"));
 
 		paths.forEach(p -> {
@@ -53,7 +53,7 @@ public class XmlFlattenerRunnerTest
 	public void runDynAttributeTest() throws Exception
 	{
 		String path = "src/test/resources/test-data-dyn/sample-data-2-dyn-attrbs-spec.yml";
-		XmlFlattenerRunner.main(path);
+		XmlFlattenerRunner.mainMain(path);
 		Stream<Path> paths = Files.walk(Paths.get("target/sample-data-dyn"));
 
 		paths.forEach(p -> {
