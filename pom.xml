@@ -19,6 +19,9 @@
 		<maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version>
 		<maven.failsafe.plugin.version>2.22.0</maven.failsafe.plugin.version>
 
+        <maven.compiler.source>${java.specification.version}</maven.compiler.source>
+        <maven.compiler.target>${java.specification.version}</maven.compiler.target>
+
 		<junit.jupiter.version>5.6.2</junit.jupiter.version>
 
         <jackson.version>2.15.3</jackson.version>
@@ -27,51 +30,35 @@
 
         <mainClass>uk.co.devworx.xmlflattener.XmlFlattenerRunner</mainClass>
 
-        <native.maven.plugin.version>0.9.28</native.maven.plugin.version>
+        <native.maven.plugin.version>0.9.18</native.maven.plugin.version>
 
         <maven.compiler.initial.memory>1024M</maven.compiler.initial.memory>
         <maven.compiler.max.memory>2048M</maven.compiler.max.memory>
+
+        <imageName>xmlFlattener</imageName>
 
 	</properties>
 
 
     <build>
-        <pluginManagement>
-            <plugins>
-         
-				<plugin>
-				    <artifactId>maven-dependency-plugin</artifactId>
-				    <version>${maven.dependency.plugin.version}</version>
-				</plugin>
-		            
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
-                    <configuration>
-                        <fork>true</fork>
-                        <meminitial>${maven.compiler.initial.memory}</meminitial>
-                            <maxmem>${maven.compiler.max.memory}</maxmem>
-                    </configuration>
-                </plugin>
-              
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven.surefire.plugin.version}</version>
-                </plugin>
-                
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>${maven.failsafe.plugin.version}</version>
-                </plugin>
-
-            </plugins>
-            
-        </pluginManagement>
-
         <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>java</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>${mainClass}</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -102,24 +89,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-	                <source>1.8</source>
-			        <target>1.8</target>
-			    </configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.source}</target>
+                </configuration>
             </plugin>
-            
-            <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			
-			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-failsafe-plugin</artifactId>
-			</plugin>
 
-            <!--
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M6</version>
+            </plugin>
+
+<!--            <plugin>
                 <groupId>org.graalvm.nativeimage</groupId>
                 <artifactId>native-image-maven-plugin</artifactId>
                 <version>${graalvm.version}</version>
@@ -135,14 +118,96 @@
                     <skip>false</skip>
                     <imageName>XmlFlattener</imageName>
                     <buildArgs>
-                        - -no-fallback
+                        &#45;&#45;no-fallback
                     </buildArgs>
                 </configuration>
-            </plugin>
-            -->
+            </plugin>-->
+
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+        <id>native</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>${native.maven.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+        <!--                    <execution>
+                                <id>test-native</id>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <phase>test</phase>
+                            </execution>-->
+                        </executions>
+
+                        <configuration>
+                            <imageName>${imageName}</imageName>
+                            <fallback>false</fallback>
+                            <buildArgs>
+                                <arg>-H:DashboardDump=fortune -H:+DashboardAll</arg>
+                            </buildArgs>
+                            <agent>
+                                <enabled>true</enabled>
+                                <options>
+                                    <option>experimental-class-loader-support</option>
+                                </options>
+                            </agent>
+                        </configuration>
+
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>java-agent</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>java</executable>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                    <arguments>
+                                        <argument>-classpath</argument>
+                                        <classpath/>
+                                        <argument>${mainClass}</argument>
+                                        <argument>/home/js/git/terahelix.io/basic-flattener/examples/Hello-World/hello-world.yml</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>native</id>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>${project.build.directory}/${imageName}</executable>
+                                    <workingDirectory>${project.build.directory}</workingDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
     <dependencies>

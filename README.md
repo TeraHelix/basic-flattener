@@ -127,6 +127,22 @@ outputTables:
 a real-world example data set from the UK Government (https://data.gov.uk/dataset/e3885716-5e9b-4e29-8dd3-b1c649fb91ed/overseas-development-assistance-oda-international-subscriptions) as demonstrating the use of nested repeating lists and how it is possible to create multiple flattening specifications for the same input XMLs.
  
  
+## Building a Native Executable with GraalVM
+
+Execute: 
+
+```
+/home/js/dev/java/graalvm-jdk-21.0.1+12.1/bin/native-image -jar target/xml-flattener-exec.jar --trace-class-initialization=com.fasterxml.jackson.databind.ObjectMapper -H:ConfigurationResourceRoots=/home/js/git/terahelix.io/basic-flattener/target/native/agent-output/main
+
+/home/js/dev/java/graalvm-jdk-21.0.1+12.1/bin/native-image -jar target/xml-flattener-exec.jar --trace-class-initialization=com.fasterxml.jackson.databind.ObjectMapper -H:ConfigurationResourceRoots=/home/js/git/terahelix.io/basic-flattener/target/native/agent-output/main --no-fallback
+
+
+```
+
+
+
+
+
 
 
  

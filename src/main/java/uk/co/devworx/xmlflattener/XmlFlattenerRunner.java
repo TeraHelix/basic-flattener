@@ -12,19 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-
-class XmlFlattenerRunnerFeature implements Feature
-{
-    public void beforeAnalysis(BeforeAnalysisAccess access) {
-        RuntimeClassInitialization.initializeAtBuildTime(Configuration.class.getPackage().getName());
-        try {
-            ImageSingletons.add(Configuration.class, Configuration.loadFromFile());
-        } catch (Throwable ex) {
-            throw new RuntimeException("native-image build-time configuration failed", ex);
-        }
-    }
-}
-
 /**
  * Main bootstrap class for executing the extraction
  */
@@ -38,8 +25,6 @@ public class XmlFlattenerRunner
      */
     public static void main(String... args) throws Exception
     {
-     /*   Configuration configuration = ImageSingletons.lookup(Configuration.class);
-        configuration.handler.handle();*/
         mainMain(args);
     }
 
